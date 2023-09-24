@@ -44,8 +44,7 @@ export default function Index({ posts = [] }: Props) {
 
 export const getStaticProps = async ({ params: { slug: catSlug } }: Params) => {
   const { slug, name, posts } = getCategoryBySlug(catSlug);
-  console.log('bus-route!!!!', slug, name);
-  return {
+   return {
     props: { slug, name, posts },
   };
 };
@@ -55,8 +54,7 @@ export async function getStaticPaths() {
 
   return {
     paths: categories.map((cat) => {
-      console.log('cat', cat);
-      return {
+       return {
         params: {
           slug: cat.slug,
         },

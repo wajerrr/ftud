@@ -6,11 +6,9 @@ const isGithubActions = process.env.GITHUB_ACTIONS || false;
 
 let assetPrefix = '';
 let basePath = '';
-console.log('isGithubActions', isGithubActions)
 if (isGithubActions) {
   const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '');
-  console.log('repo?', repo)
-  assetPrefix = `/ftud/`;
+  assetPrefix = `/${repo}/`;
   basePath = `/${repo}`;
 }
 const nextConfig = {
@@ -28,6 +26,8 @@ const nextConfig = {
   basePath,
   images: {
     unoptimized: true,
+    loader: 'custom',
+    loaderFile: './lib/img-loader.ts'
   },
 };
 
