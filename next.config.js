@@ -6,11 +6,11 @@ const isGithubActions = process.env.GITHUB_ACTIONS || false;
 
 let assetPrefix = '';
 let basePath = '';
-
+console.log('isGithubActions', isGithubActions)
 if (isGithubActions) {
   const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '');
-
-  assetPrefix = `/${repo}/`;
+  console.log('repo?', repo)
+  assetPrefix = `/ftud/`;
   basePath = `/${repo}`;
 }
 const nextConfig = {
