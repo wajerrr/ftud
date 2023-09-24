@@ -44,13 +44,15 @@ export default function Post({ post, preview }: Props) {
                 date={post.date}
               />
               <PostBody content={post.content} />
-              <Link
-                as={`/bus-route/${post.category.slug}`}
-                href="/bus-route/[slug]"
-                className="hover:underline"
-              >
-                {post.category.name}
-              </Link>
+              {post.category && (
+                <Link
+                  as={`/bus-route/${post.category.slug}`}
+                  href="/bus-route/[slug]"
+                  className="hover:underline"
+                >
+                  {post.category.name}
+                </Link>
+              )}
             </article>
           </>
         )}
