@@ -2,16 +2,17 @@ import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import Container from '../../components/container';
 import PostBody from '../../components/post-body';
-import Header from '../../components/header';
 import PostHeader from '../../components/post-header';
 import Layout from '../../components/layout';
 import { getPostBySlug, getAllPosts } from '../../lib/api';
 import PostTitle from '../../components/post-title';
 import Head from 'next/head';
-import { CMS_NAME } from '../../lib/constants';
 import markdownToHtml from '../../lib/markdownToHtml';
 import type PostType from '../../interfaces/post';
 import Link from 'next/link';
+import { BLOG_NAME } from '../../lib/constants';
+import CoverImage from '../../components/cover-image';
+import DateFormatter from '../../components/date-formatter';
 
 type Props = {
   post: PostType;
@@ -21,43 +22,35 @@ type Props = {
 
 export default function Post({ post, preview }: Props) {
   const router = useRouter();
-  const title = `${post.title} | Next.js Blog Example with ${CMS_NAME}`;
+  const title = `${BLOG_NAME} | ${post.title}`;
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
   return (
-    <Layout preview={preview}>
-      <Container>
-        <Header />
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            <article className="mb-32">
-              <Head>
-                <title>{title}</title>
-                <meta property="og:image" content={post.ogImage.url} />
-              </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-              />
-              <PostBody content={post.content} />
-              {post.category && (
-                <Link
-                  as={`/bus-route/${post.category.slug}`}
-                  href="/bus-route/[slug]"
-                  className="hover:underline"
-                >
-                  {post.category.name}
-                </Link>
-              )}
-            </article>
-          </>
+    <>
+      <article className="mb-32">
+        <Head>
+          <title>{title}</title>
+          <meta property="og:image" content={post.ogImage.url} />
+        </Head>
+
+        <div className="mb-8 md:mb-16 sm:mx-0">
+          <CoverImage title={post.title} src={post.coverImage} />
+        </div>
+        <PostTitle>{title}</PostTitle>
+        <PostBody content={post.content} />
+
+        {post.category && (
+          <Link
+            as={`/bus-route/${post.category.slug}`}
+            href="/bus-route/[slug]"
+            className="hover:underline"
+          >
+            {post.category.name}
+          </Link>
         )}
-      </Container>
-    </Layout>
+      </article>
+    </>
   );
 }
 

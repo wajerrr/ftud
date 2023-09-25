@@ -1,14 +1,16 @@
-import Link from 'next/link'
+import Link from 'next/link';
+import { BLOG_NAME } from '../lib/constants';
 
 const Header = () => {
   return (
-    <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8">
-      <Link href="/" className="hover:underline">
-        Blog
-      </Link>
-      .
-    </h2>
-  )
-}
+    <header>
+      <h1 className="bg-slate-200 text-2xl md:text-2xl font-semi-bold tracking-tight leading-tight p-2">
+        <Link href="/" className="hover:underline">
+          {BLOG_NAME}
+        </Link>
+      </h1>
+    </header>
+  );
+};
 
-export default Header
+export default Header;

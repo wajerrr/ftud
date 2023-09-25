@@ -1,36 +1,24 @@
-import cn from 'classnames'
-import Link from 'next/link'
-import Image from 'next/image'
+import Image from 'next/image';
 
 type Props = {
-  title: string
-  src: string
-  slug?: string
-}
+  title: string;
+  src: string;
+};
 
-const CoverImage = ({ title, src, slug }: Props) => {
-  const image = (
-    <Image
-      src={src}
-      alt={`${title}`}
-      className={cn('shadow-sm ', {
-        'hover:shadow-lg transition-shadow duration-200': slug,
-      })}
-      width={1300}
-      height={530}
-    />
-  )
+const CoverImage = ({ title, src }: Props) => {
   return (
-    <div className="sm:mx-0">
-      {slug ? (
-        <Link as={`/p/${slug}`} href="/p/[slug]" aria-label={title}>
-          {image}
-        </Link>
-      ) : (
-        image
-      )}
+    <div className="max-w-4xl mb-16 border-b pb-8">
+      <div className="h-[81vh] min-h-[500px] relative  border bg-neutral-50 ">
+        <Image
+          src={src}
+          alt={`${title}`}
+          className="object-contain"
+          fill={true}
+        />
+      </div>
+      <h3 className="tracking-tight leading-tight pt-4 text-gray-500 text-l">{title}</h3>
     </div>
-  )
-}
+  );
+};
 
-export default CoverImage
+export default CoverImage;
