@@ -1,18 +1,13 @@
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
-import Container from '../../components/container';
 import PostBody from '../../components/post-body';
-import PostHeader from '../../components/post-header';
-import Layout from '../../components/layout';
 import { getPostBySlugAPI, getAllPosts } from '../../lib/api';
-import PostTitle from '../../components/post-title';
 import Head from 'next/head';
 import markdownToHtml from '../../lib/markdownToHtml';
 import type PostType from '../../interfaces/post';
 import Link from 'next/link';
-import { BLOG_NAME } from '../../lib/constants';
+import { BLOG_NAME, BLOG_URL } from '../../lib/constants';
 import CoverImage from '../../components/cover-image';
-import DateFormatter from '../../components/date-formatter';
 import PrevNextMenu from '../../components/landing-page/prev-next';
 import Tags from '../../components/tags';
 
@@ -31,7 +26,11 @@ export default function Post({ post }: Props) {
       <article className="mb-32">
         <Head>
           <title>{title}</title>
-          <meta property="og:image" content={post.ogImage.url} key="image"/>
+          <meta
+            property="og:image"
+            content={`${BLOG_URL}${post.ogImage.url}`}
+            key="image"
+          />
         </Head>
         <PrevNextMenu
           previousPost={post.previousPost}
@@ -54,7 +53,6 @@ export default function Post({ post }: Props) {
         </Link>
       )}
       <PrevNextMenu previousPost={post.previousPost} nextPost={post.nextPost} />
-
     </>
   );
 }
