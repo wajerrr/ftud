@@ -37,18 +37,16 @@ export default function Post({ post, preview }: Props) {
         <div className="mb-8 md:mb-16 sm:mx-0">
           <CoverImage title={post.title} src={post.coverImage} />
         </div>
-        <PostTitle>{title}</PostTitle>
-        <PostBody content={post.content} />
-
         {post.category && (
           <Link
             as={`/bus-route/${post.category.slug}`}
             href="/bus-route/[slug]"
             className="hover:underline"
           >
-            {post.category.name}
+            Bus Route: {post.category.name}
           </Link>
         )}
+        <PostBody content={post.content} />
       </article>
     </>
   );

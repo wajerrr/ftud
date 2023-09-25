@@ -7,7 +7,7 @@ export default function myImageLoader({ src, width, quality }) {
   const isClientSide = isClient();
   let imgPrefix = '';
   if (isClientSide && window.location.href.includes('wajerrr.github.io/ftud')) {
-    imgPrefix = 'ftud'
+    imgPrefix = '/ftud'
   }
 
   if (isGithubActions) {
