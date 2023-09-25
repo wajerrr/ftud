@@ -1,3 +1,13 @@
+export type PrevNextPostType = {
+  slug: string;
+  name: string;
+};
+
+export type TagType = {
+  slug: string;
+  name: string;
+};
+
 type PostType = {
   slug: string;
   title: string;
@@ -12,6 +22,9 @@ type PostType = {
     name: string;
     slug: string;
   };
+  previousPost: PrevNextPostType;
+  nextPost?: PrevNextPostType;
+  tags?: TagType[];
 };
 
 export default PostType;

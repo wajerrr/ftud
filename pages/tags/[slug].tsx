@@ -1,9 +1,12 @@
 import Container from '../../components/container';
 import HeroPost from '../../components/hero-post';
-import { getCategoryBySlug } from '../../lib/api';
+import {
+  getAllTagsWithPosts,
+  getCategoryBySlug,
+  getTagBySlug,
+} from '../../lib/api';
 import Head from 'next/head';
 import Post from '../../interfaces/post';
-import { getAllCategoriesWithPosts } from '../../lib/api';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 type Props = {
@@ -13,16 +16,13 @@ type Props = {
 };
 
 export default function Index({ posts = [], name }: Props) {
-  const heroPost = posts[0];
   return (
     <>
       <Head>
-        <title>From The Upper Deck| Bus Route: {name}</title>
+        <title>From The Upper Deck | {name}</title>
       </Head>
       <Container>
-        <h2 className="py-8 text-2xl font-semi-bold tracking-tight leading-tight">
-          Bus Route: {name}
-        </h2>
+        <h2 className='py-8 text-2xl font-semi-bold tracking-tight leading-tight'>{name}</h2>
         {posts.map((post, index) => {
           return (
             <HeroPost
@@ -30,7 +30,7 @@ export default function Index({ posts = [], name }: Props) {
               coverImage={post.coverImage}
               date={post.date}
               slug={post.slug}
-              excerpt={heroPost.excerpt}
+              excerpt={post.excerpt}
               key={index}
             />
           );
@@ -41,14 +41,14 @@ export default function Index({ posts = [], name }: Props) {
 }
 
 export const getStaticProps = async ({ params: { slug: catSlug } }: Params) => {
-  const { slug, name, posts } = getCategoryBySlug(catSlug);
+  const { slug, name, posts } = getTagBySlug(catSlug);
   return {
     props: { slug, name, posts },
   };
 };
 
 export async function getStaticPaths() {
-  const categories = getAllCategoriesWithPosts() as any;
+  const categories = getAllTagsWithPosts() as any;
 
   return {
     paths: categories.map((cat) => {
