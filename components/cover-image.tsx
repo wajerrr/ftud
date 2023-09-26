@@ -1,24 +1,25 @@
 import Image from 'next/image';
 
 type Props = {
-  title: string;
   src: string;
+  vertical?: boolean;
+  title: string;
 };
 
-const CoverImage = ({ title, src }: Props) => {
-  return (
-    <div className="max-w-4xl mb-16 border-b pb-8">
-      <div className="h-[81vh] min-h-[500px] relative  border bg-neutral-50 ">
-        <Image
-          src={src}
-          alt={`${title}`}
-          className="object-contain"
-          fill={true}
-        />
-      </div>
-      <h3 className="tracking-tight leading-tight pt-4 text-gray-500 text-l">{title}</h3>
+const CoverImage = ({ title, src, vertical }: Props) => {
+  return vertical ? (
+    <div className="h-[81vh] min-h-[500px] relative bg-neutral-200 border-b">
+      <Image
+        src={src}
+        alt={`${title}`}
+        className="object-contain"
+        fill={true}
+      />
+    </div>
+  ) : (
+    <div className="bg-neutral-100 border-b">
+      <Image src={src} alt={`${title}`} width={1912} height={1613} />
     </div>
   );
 };
-
 export default CoverImage;

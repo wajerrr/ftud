@@ -14,6 +14,7 @@ type PostType = {
   date: string;
   coverImage: string;
   excerpt: string;
+  vertical: boolean
   ogImage: {
     url: string;
   };

@@ -4,6 +4,7 @@ excerpt: '253 to Hackney Central'
 coverImage: '/assets/blog/vertical.jpg'
 date: '2023-09-26'
 category: '243 to Woodgreen'
+vertical: true
 ogImage:
   url: '/assets/blog/vertical.jpg'
 ---

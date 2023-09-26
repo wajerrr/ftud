@@ -37,7 +37,11 @@ export default function Post({ post }: Props) {
           nextPost={post.nextPost}
         />
         <div className="mb-8 md:mb-16 sm:mx-0">
-          <CoverImage title={post.title} src={post.coverImage} />
+          <CoverImage
+            vertical={post.vertical}
+            title={post.title}
+            src={post.coverImage}
+          />
         </div>
 
         <PostBody content={post.content} />

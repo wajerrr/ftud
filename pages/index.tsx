@@ -14,6 +14,7 @@ export default function Index({ allPosts = [] }: Props) {
           <HeroPost
             title={post.title}
             coverImage={post.coverImage}
+            vertical={post.vertical}
             date={post.date}
             slug={post.slug}
             excerpt={post.excerpt}

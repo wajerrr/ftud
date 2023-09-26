@@ -26,6 +26,7 @@ export default function Index({ posts = [], name }: Props) {
         {posts.map((post, index) => {
           return (
             <HeroPost
+              vertical={post.vertical}
               title={post.title}
               coverImage={post.coverImage}
               date={post.date}

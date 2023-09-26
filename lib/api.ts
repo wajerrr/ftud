@@ -40,6 +40,7 @@ function getPostBySlug(slug: string) {
       });
     });
   }
+  items.vertical = Boolean(data.vertical);
   return items;
 }
 
