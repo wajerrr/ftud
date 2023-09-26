@@ -12,17 +12,13 @@ type PostType = {
   slug: string;
   title: string;
   date: string;
-  coverImage: string;
+  photo: string;
   excerpt: string;
   vertical: boolean
   ogImage: {
     url: string;
   };
   content: string;
-  category?: {
-    name: string;
-    slug: string;
-  };
   previousPost: PrevNextPostType;
   nextPost?: PrevNextPostType;
   tags?: TagType[];

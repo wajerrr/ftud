@@ -9,8 +9,6 @@ export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
 
-const getCategorySlug = (catName: string) =>
-  `${catName.split(' ').join('-').toLowerCase()}`;
 
 const getTagSlug = (catName: string) =>
   `${catName.split(' ').join('-').toLowerCase()}`;
@@ -24,12 +22,6 @@ function getPostBySlug(slug: string) {
 
   items.slug = realSlug;
   items.content = content;
-  if (data.category) {
-    items.category = {
-      name: data.category,
-      slug: getCategorySlug(data.category),
-    };
-  }
 
   if (data.tags) {
     items.tags = [];
@@ -79,28 +71,6 @@ export function getAllPosts() {
     .map(addPreviousAndNext);
   return posts;
 }
-
-const getCategories = () => {
-  const posts = getAllPosts();
-  const categories = {};
-  posts.forEach((post) => {
-    if (post.category) {
-      const catSlug = post.category.slug;
-      if (categories[catSlug]) {
-        categories[catSlug].posts.push(post);
-      } else {
-        categories[catSlug] = {};
-        categories[catSlug].slug = catSlug;
-        categories[catSlug].name = post.category.name;
-        categories[catSlug].posts = [post];
-      }
-    }
-  });
-  return categories || {};
-};
-
-export const getAllCategoriesWithPosts = () => Object.values(getCategories());
-export const getCategoryBySlug = (slug: string) => getCategories()[slug];
 
 const getTags = () => {
   const posts = getAllPosts();

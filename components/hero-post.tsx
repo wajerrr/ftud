@@ -4,18 +4,18 @@ import Link from 'next/link';
 
 type Props = {
   title: string;
-  coverImage: string;
+  photo: string;
   date: string;
   excerpt: string;
   slug: string;
   vertical?: boolean;
 };
 
-const HeroPost = ({ title, coverImage, vertical, slug }: Props) => {
+const HeroPost = ({ title, photo, vertical, slug }: Props) => {
   return (
     <section className="mb-5">
       <Link as={`/p/${slug}`} href="/p/[slug]">
-        <CoverImage vertical={vertical} title={title} src={coverImage} />
+        <CoverImage vertical={vertical} title={title} src={photo} />
         <h3 className="tracking-tight leading-tight pt-4 text-gray-500 text-l">
           {title}
         </h3>

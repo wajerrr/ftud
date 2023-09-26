@@ -1,10 +1,6 @@
 import Container from '../../components/container';
 import HeroPost from '../../components/hero-post';
-import {
-  getAllTagsWithPosts,
-  getCategoryBySlug,
-  getTagBySlug,
-} from '../../lib/api';
+import { getAllTagsWithPosts, getTagBySlug } from '../../lib/api';
 import Head from 'next/head';
 import Post from '../../interfaces/post';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
@@ -21,24 +17,23 @@ export default function Index({ posts = [], name }: Props) {
       <Head>
         <title>From The Upper Deck | {name}</title>
       </Head>
-      <Container>
-        <h2 className="py-8 text-2xl font-semi-bold tracking-tight leading-tight">
-          {name}
-        </h2>
-        {posts.map((post, index) => {
-          return (
-            <HeroPost
-              vertical={post.vertical}
-              title={post.title}
-              coverImage={post.coverImage}
-              date={post.date}
-              slug={post.slug}
-              excerpt={post.excerpt}
-              key={index}
-            />
-          );
-        })}
-      </Container>
+
+      <h2 className="py-8 text-2xl font-semi-bold tracking-tight leading-tight">
+        {name}
+      </h2>
+      {posts.map((post, index) => {
+        return (
+          <HeroPost
+            vertical={post.vertical}
+            title={post.title}
+            photo={post.photo}
+            date={post.date}
+            slug={post.slug}
+            excerpt={post.excerpt}
+            key={index}
+          />
+        );
+      })}
     </>
   );
 }

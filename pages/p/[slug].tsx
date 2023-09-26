@@ -5,7 +5,6 @@ import { getPostBySlugAPI, getAllPosts } from '../../lib/api';
 import Head from 'next/head';
 import markdownToHtml from '../../lib/markdownToHtml';
 import type PostType from '../../interfaces/post';
-import Link from 'next/link';
 import { BLOG_NAME, BLOG_URL } from '../../lib/constants';
 import CoverImage from '../../components/cover-image';
 import PrevNextMenu from '../../components/landing-page/prev-next';
@@ -40,22 +39,13 @@ export default function Post({ post }: Props) {
           <CoverImage
             vertical={post.vertical}
             title={post.title}
-            src={post.coverImage}
+            src={post.photo}
           />
         </div>
 
         <PostBody content={post.content} />
       </article>
       <Tags tags={post.tags} />
-      {post.category && (
-        <Link
-          as={`/bus-route/${post.category.slug}`}
-          href="/bus-route/[slug]"
-          className="hover:underline"
-        >
-          Bus Route: {post.category.name}
-        </Link>
-      )}
       <PrevNextMenu previousPost={post.previousPost} nextPost={post.nextPost} />
     </>
   );

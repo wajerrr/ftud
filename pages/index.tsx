@@ -13,7 +13,7 @@ export default function Index({ allPosts = [] }: Props) {
         return (
           <HeroPost
             title={post.title}
-            coverImage={post.coverImage}
+            photo={post.photo}
             vertical={post.vertical}
             date={post.date}
             slug={post.slug}
