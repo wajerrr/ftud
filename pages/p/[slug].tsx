@@ -9,6 +9,7 @@ import { BLOG_NAME, BLOG_URL } from '../../lib/constants';
 import CoverImage from '../../components/cover-image';
 import PrevNextMenu from '../../components/landing-page/prev-next';
 import Tags from '../../components/tags';
+import DateFormatter from '../../components/date-formatter';
 
 type Props = {
   post: PostType;
@@ -45,6 +46,7 @@ export default function Post({ post }: Props) {
 
         <PostBody content={post.content} />
       </article>
+      <DateFormatter dateString={post.dateTaken}/>
       <Tags tags={post.tags} />
       <PrevNextMenu previousPost={post.previousPost} nextPost={post.nextPost} />
     </>

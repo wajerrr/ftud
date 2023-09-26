@@ -12,9 +12,10 @@ type PostType = {
   slug: string;
   title: string;
   date: string;
+  dateTaken: string;
   photo: string;
   excerpt: string;
-  vertical: boolean
+  vertical: boolean;
   ogImage: {
     url: string;
   };
