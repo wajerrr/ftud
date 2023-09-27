@@ -8,14 +8,14 @@ type Props = {
 
 export default function PrevNextMenu({ previousPost, nextPost }: Props) {
   return (
-    <div className='mb-2 mt-2 h-10'>
+    <div className="mb-2 mt-2 h-10 flex justify-between">
       {nextPost && (
         <Link
           as={`/p/${nextPost.slug}`}
           href="/p/[slug]"
-          className="hover:underline border float-left p-2 block"
+          className="hover:underline border p-2 block"
         >
-          {`<<<`} Next
+          {`<`} Next
         </Link>
       )}
 
@@ -23,9 +23,9 @@ export default function PrevNextMenu({ previousPost, nextPost }: Props) {
         <Link
           as={`/p/${previousPost.slug}`}
           href="/p/[slug]"
-          className="hover:underline float-right border p-2 block"
+          className="hover:underline border p-2 block"
         >
-          Previous {`>>>`}
+          Previous {`>`}
         </Link>
       )}
     </div>

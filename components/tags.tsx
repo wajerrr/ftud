@@ -8,10 +8,10 @@ type Props = {
 export default function Tags({ tags }: Props) {
   return (
     tags && (
-      <ul className="flex mb-4">
+      <ul className="flex flex-wrap mb-4 w-[100%]">
         {tags.map(({ name, slug }, index) => {
           return (
-            <li key="index">
+            <li key={index} className="my-2">
               {' '}
               <Link
                 as={`/tags/${slug}`}

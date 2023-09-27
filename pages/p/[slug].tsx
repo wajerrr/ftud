@@ -23,15 +23,16 @@ export default function Post({ post }: Props) {
   }
   return (
     <>
+      {' '}
+      <Head>
+        <title>{title}</title>
+        <meta
+          property="og:image"
+          content={`${BLOG_URL}${post.ogImage.url}`}
+          key="image"
+        />
+      </Head>
       <article className="mb-32">
-        <Head>
-          <title>{title}</title>
-          <meta
-            property="og:image"
-            content={`${BLOG_URL}${post.ogImage.url}`}
-            key="image"
-          />
-        </Head>
         <PrevNextMenu
           previousPost={post.previousPost}
           nextPost={post.nextPost}
@@ -46,7 +47,7 @@ export default function Post({ post }: Props) {
 
         <PostBody content={post.content} />
       </article>
-      <DateFormatter dateString={post.dateTaken}/>
+      <DateFormatter dateString={post.dateTaken} />
       <Tags tags={post.tags} />
       <PrevNextMenu previousPost={post.previousPost} nextPost={post.nextPost} />
     </>
