@@ -31,6 +31,7 @@ export default function Index({ posts = [], name }: Props) {
             slug={post.slug}
             excerpt={post.excerpt}
             key={index}
+            priority={Boolean(index < 3)}
           />
         );
       })}

@@ -42,6 +42,7 @@ export default function Post({ post }: Props) {
             vertical={post.vertical}
             title={post.title}
             src={post.photo}
+            priority
           />
         </div>
 
