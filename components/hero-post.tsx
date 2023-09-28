@@ -9,13 +9,19 @@ type Props = {
   excerpt: string;
   slug: string;
   vertical?: boolean;
+  index?: number;
 };
 
-const HeroPost = ({ title, photo, vertical, slug }: Props) => {
+const HeroPost = ({ title, photo, vertical, slug, index }: Props) => {
   return (
     <section className="mb-5">
       <Link as={`/p/${slug}`} href="/p/[slug]">
-        <CoverImage vertical={vertical} title={title} src={photo} />
+        <CoverImage
+          index={index}
+          vertical={vertical}
+          title={title}
+          src={photo}
+        />
         <h3 className="tracking-tight leading-tight pt-4 text-gray-500 text-l">
           {title}
         </h3>
