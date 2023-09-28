@@ -20,7 +20,13 @@ const CoverImage = ({ title, src, vertical, index = 4 }: Props) => {
     </div>
   ) : (
     <div className="bg-neutral-100 border-b">
-      <Image src={src} alt={`${title}`} width={1912} height={1613} />
+      <Image
+        priority={Boolean(index < 3)}
+        src={src}
+        alt={`${title}`}
+        width={1912}
+        height={1613}
+      />
     </div>
   );
 };
