@@ -20,8 +20,11 @@ type PostType = {
     url: string;
   };
   content: string;
+  displayOnHomepage: boolean;
   previousPost: PrevNextPostType;
   nextPost?: PrevNextPostType;
+  previousPostFromHomepage: PrevNextPostType;
+  nextPostFromHomepage?: PrevNextPostType;
   tags?: TagType[];
 };
 

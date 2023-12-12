@@ -1,5 +1,5 @@
 import HeroPost from '../components/hero-post';
-import { getAllPosts } from '../lib/api';
+import { getAllHomepagePosts } from '../lib/api';
 import Post from '../interfaces/post';
 
 type Props = {
@@ -28,7 +28,7 @@ export default function Index({ allPosts = [] }: Props) {
 }
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts();
+  const allPosts = getAllHomepagePosts();
 
   return {
     props: { allPosts },

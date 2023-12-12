@@ -15,7 +15,7 @@ type Props = {
 const HeroPost = ({ title, photo, vertical, slug, priority }: Props) => {
   return (
     <section className="mb-5">
-      <Link as={`/p/${slug}`} href="/p/[slug]">
+      <Link as={`/p/${slug}?gallery=homepage`} href="/p/[slug]">
         <CoverImage
           priority={priority}
           vertical={vertical}

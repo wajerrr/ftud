@@ -16,9 +16,14 @@ type Props = {
 };
 
 export default function Post({ post }: Props) {
-  const router = useRouter();
+  const { isFallback, query } = useRouter();
+  const isHomepage = query.gallery === 'homepage';
+  const previousPost = isHomepage
+    ? post.previousPostFromHomepage
+    : post.previousPost;
+  const nextPost = isHomepage ? post.nextPostFromHomepage : post.nextPost;
   const title = `${BLOG_NAME} | ${post.title}`;
-  if (!router.isFallback && !post?.slug) {
+  if (!isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
   return (
@@ -33,10 +38,7 @@ export default function Post({ post }: Props) {
         />
       </Head>
       <article className="mb-32">
-        <PrevNextMenu
-          previousPost={post.previousPost}
-          nextPost={post.nextPost}
-        />
+        <PrevNextMenu previousPost={previousPost} nextPost={nextPost} />
         <div className="mb-8 md:mb-16 sm:mx-0">
           <CoverImage
             vertical={post.vertical}
@@ -50,7 +52,7 @@ export default function Post({ post }: Props) {
       </article>
       <DateFormatter dateString={post.dateTaken} />
       <Tags tags={post.tags} />
-      <PrevNextMenu previousPost={post.previousPost} nextPost={post.nextPost} />
+      <PrevNextMenu previousPost={previousPost} nextPost={nextPost} />
     </>
   );
 }

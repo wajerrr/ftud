@@ -4,6 +4,7 @@ import { getAllTagsWithPosts, getTagBySlug } from '../../lib/api';
 import Head from 'next/head';
 import Post from '../../interfaces/post';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
+import { BLOG_NAME } from '../../lib/constants';
 
 type Props = {
   posts: Post[];
@@ -12,10 +13,11 @@ type Props = {
 };
 
 export default function Index({ posts = [], name }: Props) {
+  const title = `${BLOG_NAME} | ${name}`;
   return (
     <>
       <Head>
-        <title>From The Upper Deck | {name}</title>
+        <title>{title}</title>
       </Head>
 
       <h2 className="py-8 text-2xl font-semi-bold tracking-tight leading-tight">

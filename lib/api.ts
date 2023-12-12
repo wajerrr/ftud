@@ -9,7 +9,6 @@ export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
 
-
 const getTagSlug = (catName: string) =>
   `${catName.split(' ').join('-').toLowerCase()}`;
 
@@ -18,22 +17,23 @@ function getPostBySlug(slug: string) {
   const fullPath = join(postsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
-  const items = { ...data };
+  const item = { ...data };
 
-  items.slug = realSlug;
-  items.content = content;
+  item.slug = realSlug;
+  item.content = content;
 
   if (data.tags) {
-    items.tags = [];
+    item.tags = [];
     data.tags.forEach((tag) => {
-      items.tags.push({
+      item.tags.push({
         name: tag,
         slug: getTagSlug(tag),
       });
     });
   }
-  items.vertical = Boolean(data.vertical);
-  return items;
+  item.vertical = Boolean(data.vertical);
+  item.displayOnHomepage = Boolean(data.displayOnHomepage);
+  return item;
 }
 
 export function getPostBySlugAPI(slug: string) {
@@ -62,10 +62,47 @@ const addPreviousAndNext = (post: PostType, index, posts: PostType[]) => {
   return newPost;
 };
 
+const addPreviousAndNextFromHomepage = (
+  post: PostType,
+  index,
+  posts: PostType[],
+) => {
+  const newPost = { ...post };
+  const homepagePosts = posts.filter((p) => p.displayOnHomepage);
+  const nextPost = homepagePosts[index - 1];
+  const previousPost = homepagePosts[index + 1];
+
+  if (previousPost) {
+    newPost.previousPostFromHomepage = {
+      name: previousPost.title,
+      slug: `${previousPost.slug}?gallery=homepage`,
+    };
+  }
+  if (nextPost) {
+    newPost.nextPostFromHomepage = {
+      name: nextPost.title,
+      slug: `${nextPost.slug}?gallery=homepage`,
+    };
+  }
+  return newPost;
+};
+
 export function getAllPosts() {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug))
+    // sort posts by date in descending order
+    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
+    .map(addPreviousAndNext)
+    .map(addPreviousAndNextFromHomepage);
+  return posts;
+}
+
+export function getAllHomepagePosts() {
+  const slugs = getPostSlugs();
+  const posts = slugs
+    .map((slug) => getPostBySlug(slug))
+    .filter((post) => post.displayOnHomepage)
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
     .map(addPreviousAndNext);
